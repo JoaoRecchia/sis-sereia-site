@@ -1,0 +1,154 @@
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  /* imagem de fundo */
+  background-image: url("https://pascal.com.br/wp-content/uploads/2020/07/mar-verde-azul.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* camada escura suave por cima da foto */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 27, 39, .55) 0%,
+    rgba(10, 27, 39, .75) 60%,
+    rgba(10, 27, 39, .9) 100%
+  );
+}
+
+/* cartão translúcido (glass) */
+.hero-card {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 16px;
+  padding: clamp(18px, 3vw, 28px);
+  border-radius: 16px;
+  background: rgba(15, 43, 61, .55);  /* usa seu azul com transparência */
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+.hero-card h1 {
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--txt);
+  letter-spacing: .5px;
+}
+
+.hero-card p {
+  margin: 0 0 18px;
+  color: var(--txt-dim);
+  font-size: clamp(14px, 2vw, 18px);
+}
+
+.hero-actions {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--cor-ouro-2);
+  color: var(--txt);
+  text-decoration: none;
+  font-weight: 600;
+}
+.hero-btn.primary {
+  background: var(--cor-ouro);
+  color: #0B1320;
+  border: none;
+}
+.hero-btn:hover { filter: brightness(1.06); }
+
+/* ===== SEÇÃO PRODUTOS ===== */
+.section {
+  position: relative;
+  padding: 72px 0 40px; /* topo, laterais, baixo */
+}
+.section h2 {
+  margin: 32px 0 16px;
+  color: var(--cor-ouro);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* rodapé da seção com botão à direita */
+.section-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+/* botão menor “ver mais” */
+.btn-vermais {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: var(--cor-ouro);
+  color: #0B1320;
+  text-decoration: none;
+  border: 1px solid var(--cor-ouro-2);
+  transition: 0.2s ease;
+}
+.btn-vermais:hover {
+  background: var(--cor-ouro-2);
+  color: #fff;
+}
+
+/* ===== RODAPÉ ===== */
+.site-footer {
+  margin-top: 40px;
+  border-top: 1px solid var(--linha);
+  background: var(--bg-2);
+  color: var(--txt-dim);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: grid;
+  gap: 12px;
+}
+.footer-brand { color: var(--txt); font-weight: 700; }
+.footer-small { font-size: 12px; opacity: .8; }
+.footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+.footer-links a { color: var(--txt-dim); }
+.footer-links a:hover { color: var(--cor-ouro); }
+
+/* ===== RESPONSIVO HOME ===== */
+@media (max-width: 992px) {
+  .section { padding: 64px 0 32px; }
+}
+@media (max-width: 768px) {
+  .hero { min-height: 60vh; }
+  .hero-card { margin: 0 12px; }
+  .section { padding: 56px 0 28px; }
+}
+@media (max-width: 576px) {
+  .section h2 { margin: 24px 0 12px; }
+  .btn-vermais { padding: 6px 10px; font-size: 0.8rem; }
+}

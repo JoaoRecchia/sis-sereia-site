@@ -1,0 +1,205 @@
+/* ===========================
+   ProductModal.css (tema SIS)
+   Usa variáveis do theme.css:
+   --bg, --bg-2, --txt, --txt-dim, --linha, --cor-ouro, --cor-ouro-2, --accent
+   =========================== */
+
+/* Fundo escurecido atrás do modal */
+.pm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  display: grid;
+  place-items: center;
+  z-index: 120;
+  animation: pm-fade .18s ease;
+}
+
+/* Caixa do modal com "glass" no padrão do site */
+.pm-dialog {
+  width: min(1000px, 94vw);
+  max-height: 92vh;
+  background: rgba(15, 43, 61, .55);      /* variação do --bg-2 com alpha */
+  border: 1px solid rgba(255, 255, 255, .12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--txt);
+  border-radius: 14px;
+  overflow: hidden auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+  position: relative;
+  transform: translateY(6px);
+  animation: pm-up .18s ease forwards;
+}
+
+/* Botão de fechar (X) no canto */
+/* Botão de fechar (X) – hit area grande e acima de tudo */
+.pm-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  width: 44px;            /* hit area grande */
+  height: 44px;
+  display: grid;
+  place-items: center;
+
+  background: transparent;
+  border: 0;
+  color: var(--txt);
+  font-size: 24px;        /* o X visual */
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 10px;
+
+  z-index: 10;            /* garante sobreposição */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.pm-close:hover { background: rgba(255,255,255,.06); }
+.pm-close:focus-visible {
+  outline: 2px solid var(--cor-ouro);
+  outline-offset: 2px;
+}
+
+/* Em telas de toque, aumente ainda mais */
+@media (pointer: coarse) {
+  .pm-close { width: 52px; height: 52px; font-size: 26px; }
+}
+
+
+
+/* Corpo: coluna de imagens + coluna de infos */
+.pm-body {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* ======== MÍDIA (galeria) ======== */
+.pm-media {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Imagem principal (hero) com borda suave do tema */
+.pm-hero {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--linha);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
+}
+
+/* Miniaturas em grid fluido */
+.pm-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 8px;
+}
+
+/* Botão de cada thumb com contorno quando ativa */
+.pm-thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.pm-thumb:hover { transform: translateY(-1px); }
+.pm-thumb.is-active { border-color: var(--cor-ouro); }
+
+/* Imagem da miniatura */
+.pm-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+/* ======== INFORMAÇÕES ======== */
+.pm-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Título com destaque dourado sutil */
+.pm-title {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--txt);
+  letter-spacing: .3px;
+  position: relative;
+}
+.pm-title::after {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 2px;
+  margin-top: 8px;
+  background: var(--cor-ouro);
+  opacity: .85;
+  border-radius: 2px;
+}
+
+/* Descrição em texto secundário */
+.pm-desc {
+  margin: 0;
+  color: var(--txt-dim);
+  line-height: 1.5;
+}
+
+/* Lista de “fatos” do produto (tamanho, tecido, etc.) */
+.pm-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  color: var(--txt-dim);
+}
+.pm-facts li strong {
+  color: var(--txt);
+  font-weight: 700;
+}
+
+/* Ações: usa o mesmo estilo de botões do tema */
+.pm-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pm-actions .btn-prim {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--cor-ouro);
+  color: #0B1320;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  transition: filter .2s ease, transform .15s ease;
+}
+.pm-actions .btn-prim:hover { filter: brightness(1.08); }
+.pm-actions .btn-prim:active { transform: translateY(1px); }
+
+/* ======== RESPONSIVO ======== */
+@media (max-width: 900px) {
+  .pm-body { grid-template-columns: 1fr; }
+  .pm-hero { aspect-ratio: 16/10; }
+}
+
+/* ======== ANIMAÇÕES ======== */
+@keyframes pm-fade {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes pm-up {
+  to { transform: translateY(0); }
+}
